@@ -31,20 +31,21 @@ if($level == 0) { include "template/navigasi_user.php"; }
                            <div class="card-body">  
                                 <?php
                                     $id = $_GET['id']; // Mengambil ID pengguna dari URL
+                                    include('koneksi.php');
 
-                                    $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                    // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
 
                                     if (isset($_POST['submit'])) {
                                         $username = $_POST['username'];
                                         $password = $_POST['password'];
                                         $name = $_POST['name'];
 
-                                        mysqli_query($koneksi, "UPDATE users SET name='$name', username='$username', password='$password' WHERE id='$id'") or die(mysqli_error($koneksi));
+                                        mysqli_query($db, "UPDATE users SET name='$name', username='$username', password='$password' WHERE id='$id'") or die(mysqli_error($koneksi));
 
                                         echo "<script>alert('Data berhasil diupdate.');window.location='index.php';</script>";
                                     }
 
-                                    $query = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$id'");
+                                    $query = mysqli_query($db, "SELECT * FROM users WHERE id='$id'");
                                     $data = mysqli_fetch_assoc($query);
 
                                 ?> 

@@ -26,11 +26,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
         
     </head>
     
-    <div id="layoutSidenav_content">
-        <main>
-        <div class="container-fluid px-4">
-        <div class="content">
-                        <div class="card mb-4">
+        <div id="layoutSidenav_content">
+            <main>
+            <div class="container-fluid px-4">
+                    <div class="content">
                             <h1 class="mt-4">Edit kelas</h1>
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item"><a href="menu_kelas.php">Data Kelas</a></li>
@@ -43,18 +42,19 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                     if (isset($_GET['id'])) {
                                         $id = $_GET['id']; // Mengambil ID pengguna dari URL
 
-                                        $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                        // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                        include('koneksi.php');
 
                                         if (isset($_POST['submit'])) {
                                             $kelas = $_POST['kelas'];
                                             $id_semester = $_POST['id_semester'];
 
-                                            mysqli_query($koneksi, "UPDATE kelas SET kelas='$kelas', id_semester='$id_semester' WHERE id_kelas='$id'") or die(mysqli_error($koneksi));
+                                            mysqli_query($db, "UPDATE kelas SET kelas='$kelas', id_semester='$id_semester' WHERE id_kelas='$id'") or die(mysqli_error($db));
 
                                             echo "<script>alert('Data berhasil diupdate.');window.location='menu_kelas.php';</script>";
                                         }
 
-                                        $query = mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id'");
+                                        $query = mysqli_query($db, "SELECT * FROM kelas WHERE id_kelas='$id'");
                                         $data = mysqli_fetch_assoc($query);
                                     }
                                 ?>
@@ -70,8 +70,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                         <select name="id_semester" required id="" class="form-control">
                                             <option value="">--Pilih Semester--</option>
                                             <?php
-                                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
-                                                $semester = mysqli_query($koneksi, "SELECT * FROM semester");
+                                                include('koneksi.php');
+
+                                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                                $semester = mysqli_query($db, "SELECT * FROM semester");
                                                 while ($semester_data = mysqli_fetch_array($semester)) {
                                                 $selected = ($semester_data['id_semester'] == $data['id_semester']) ? 'selected' : '';
                                             ?>
@@ -79,14 +81,12 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary m-3">Update</button>
-
+                                    <button type="submit" name="submit" class="btn btn-primary">Update</button>
                                 </form>
                             </div>
                         </div>   
                     </div>
-                </main>
-
+                
             </div>
         </div>
         

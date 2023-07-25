@@ -39,10 +39,12 @@ if($level == 0) { include "template/navigasi_user.php"; }
                         <div class="card mb-4">
                             <div class="card-body">
                             <?php
-                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                 include('koneksi.php');
+
+                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                 $id_ruangan = $_GET['id_ruang']; 
 
-                                $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan WHERE id_ruangan='$id_ruangan'");
+                                $ruangan = mysqli_query($db, "SELECT * FROM ruangan WHERE id_ruangan='$id_ruangan'");
                                 $ruangan = mysqli_fetch_array($ruangan);
                             ?>    
                             <form method="post" action="proses_edit_ruangan.php">
@@ -59,7 +61,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                 $id_ruangan = $_POST['id_ruangan'];
                                 $ruangan = $_POST['ruangan'];
 
-                                mysqli_query($koneksi, "UPDATE ruangan SET ruangan='$ruangan' WHERE id_ruangan='$id_ruangan'") or die(mysqli_error($koneksi));
+                                mysqli_query($db, "UPDATE ruangan SET ruangan='$ruangan' WHERE id_ruangan='$id_ruangan'") or die(mysqli_error($koneksi));
 
                                 echo "<script>alert('Data berhasil diupdate.');window.location='admin_ruangan.php';</script>";
                             }

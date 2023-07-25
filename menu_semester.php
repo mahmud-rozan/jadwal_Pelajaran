@@ -66,10 +66,11 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                     </tfoot>
                                     <tbody>
                                         <?php
-                                            $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                            include('koneksi.php');
+                                            // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                             $no = 1;
                                             $select         = "select * from semester";
-                                            $select         = mysqli_query($koneksi, $select);
+                                            $select         = mysqli_query($db, $select);
                                             while($data= mysqli_fetch_array($select)){
                                         ?>
                                         <tr>

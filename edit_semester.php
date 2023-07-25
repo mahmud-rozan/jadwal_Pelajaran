@@ -39,9 +39,11 @@ if($level == 0) { include "template/navigasi_user.php"; }
                         <div class="card mb-4">
                             <div class="card-body">
                             <?php
-                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                 include('koneksi.php');
+
+                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                 $id_semester = $_GET['id_semester'];
-                                $semester = mysqli_query($koneksi, "select * from semester where id_semester='$id_semester'");
+                                $semester = mysqli_query($db, "select * from semester where id_semester='$id_semester'");
                                 $semester = mysqli_fetch_array($semester);
                             ?>
                             <form method="post" action="proses_edit_semester.php">

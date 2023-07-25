@@ -43,7 +43,8 @@ if($level == 0) { include "template/navigasi_user.php"; }
                             <?php
                                 $id = $_GET['id']; // Mengambil ID pengguna dari URL
 
-                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                include('koneksi.php');
+                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
 
                                 if (isset($_POST['submit'])) {
                                     $username = $_POST['username'];
@@ -51,12 +52,12 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                     $name = $_POST['name'];
                                     $level = $_POST['level'];
 
-                                    mysqli_query($koneksi, "UPDATE users SET name='$name', username='$username', password='$password', level='$level' WHERE id='$id'") or die(mysqli_error($koneksi));
+                                    mysqli_query($db, "UPDATE users SET name='$name', username='$username', password='$password', level='$level' WHERE id='$id'") or die(mysqli_error($koneksi));
 
                                     echo "<script>alert('Data berhasil diupdate.');window.location='menu_user.php';</script>";
                                 }
 
-                                $query = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$id'");
+                                $query = mysqli_query($db, "SELECT * FROM users WHERE id='$id'");
                                 $data = mysqli_fetch_assoc($query);
 
                             ?> 

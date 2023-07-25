@@ -38,9 +38,11 @@ if($level == 0) { include "template/navigasi_user.php"; }
                         <div class="card mb-4">
                             <div class="card-body">
                             <?php
-                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                include('koneksi.php');
+
+                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                 $id_pelajaran = $_GET['id_pelajaran'];
-                                $pelajaran = mysqli_query($koneksi, "select * from pelajaran where id_pelajaran='$id_pelajaran'");
+                                $pelajaran = mysqli_query($db, "select * from pelajaran where id_pelajaran='$id_pelajaran'");
                                 $pelajaran = mysqli_fetch_array($pelajaran);
                             ?>
                         <form method="post" action="proses_edit_pelajaran.php">

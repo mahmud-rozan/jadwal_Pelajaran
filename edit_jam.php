@@ -40,9 +40,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
                         <div class="card mb-4">
                             <div class="card-body">
                                 <?php
-                                    $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                    include('koneksi.php');
+                                    // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                     $id_jam = $_GET['id_jam'];
-                                    $jam = mysqli_query($koneksi, "select * from jam where id_jam='$id_jam'");
+                                    $jam = mysqli_query($db, "select * from jam where id_jam='$id_jam'");
                                     $jam = mysqli_fetch_array($jam);
                                 ?>
                                 <form method="post" action="proses_edit_jam.php">

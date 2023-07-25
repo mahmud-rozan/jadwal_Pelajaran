@@ -41,9 +41,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
                             <div class="card-body">
                             
                             <?php
-                                $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                include('koneksi.php');
+                                // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
                                 $id_guru = $_GET['id_guru'];
-                                $guru = mysqli_query($koneksi, "select * from guru where id_guru='$id_guru'");
+                                $guru = mysqli_query($db, "select * from guru where id_guru='$id_guru'");
                                 $guru = mysqli_fetch_array($guru);
                             ?>
                             <form method="post" action="proses_edit_guru.php">
