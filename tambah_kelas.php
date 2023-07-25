@@ -49,8 +49,9 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                 <select name="id_semester" id="" class="form-control">
                                     <option value="">--Pilih Semester--</option>
                                     <?php 
-                                        $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
-                                        $semester         = mysqli_query($koneksi, "select * from semester");
+                                        include('koneksi.php');
+                                        // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+                                        $semester         = mysqli_query($db, "select * from semester");
                                         while($data= mysqli_fetch_array($semester)){
                                     ?>
                                     <option value="<?php echo $data['id_semester']; ?>"><?php echo $data['tahun'].' '.$data['semester']; ?></option>

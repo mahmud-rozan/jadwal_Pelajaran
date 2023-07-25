@@ -58,10 +58,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
             <div class="card bg-info mb-4">
                 <div class="">JUMLAH PENGGUNA</div>
                 <?php
-                    require 'dbconfig.php';
+                    require 'koneksi.php';
 
                     $query = "SELECT id FROM users ORDER BY id";
-                    $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($db, $query);
 
                     $row = mysqli_num_rows($query_run);
 
@@ -77,10 +77,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
             <div class="card bg-warning mb-4">
                 <div class="">JUMLAH GURU</div>
                 <?php
-                    require 'dbconfig.php';
+                    require 'koneksi.php';
 
                     $query = "SELECT id_guru FROM guru ORDER BY id_guru";
-                    $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($db, $query);
 
                     $row = mysqli_num_rows($query_run);
 
@@ -96,10 +96,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
             <div class="card bg-success mb-4">
                 <div class="">JUMLAH PELAJARAN</div>
                 <?php
-                    require 'dbconfig.php';
+                    require 'koneksi.php';
 
                     $query = "SELECT id_pelajaran FROM pelajaran ORDER BY id_pelajaran";
-                    $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($db, $query);
 
                     $row = mysqli_num_rows($query_run);
 
@@ -115,10 +115,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
             <div class="card bg-danger mb-4">
                 <div class="">JUMLAH RUANGAN</div>
                 <?php
-                    require 'dbconfig.php';
+                    require 'koneksi.php';
 
                     $query = "SELECT id_ruangan FROM ruangan ORDER BY id_ruangan";
-                    $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($db, $query);
 
                     $row = mysqli_num_rows($query_run);
 
