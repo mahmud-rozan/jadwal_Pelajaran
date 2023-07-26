@@ -43,11 +43,8 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                     </thead>                                   
                                     <tbody>
                                         <?php
-                                            $host = 'localhost';
-                                            $username = 'root';
-                                            $password = '';
-                                            $database = 'jadwal';
-                                            $conn = mysqli_connect($host, $username, $password, $database);
+                                            include('koneksi.php');
+                                            // $conn = mysqli_connect($db);
                                             $no = 1;
                                             $query = "SELECT *
                                             FROM jadwal
@@ -57,7 +54,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                             LEFT JOIN ruangan ON jadwal.id_ruangan = ruangan.id_ruangan
                                             LEFT JOIN pelajaran ON jadwal.id_pelajaran = pelajaran.id_pelajaran";
 
-                                                        $result = mysqli_query($conn, $query);
+                                                        $result = mysqli_query($db, $query);
 
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                         ?>

@@ -3,7 +3,8 @@
     // error_reporting(0);
     session_start();
 
-    $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
+    include "koneksi.php";
+    // $koneksi = mysqli_connect("localhost", "root", "", "jadwal");
 
     $id_jadwal      = $_POST['id_jadwal'];
     $id_guru        = @$_POST['id_guru'];
@@ -19,14 +20,14 @@
 
         if($id_jadwal){
 
-            mysqli_query($koneksi, "update jadwal set 
+            mysqli_query($db, "update jadwal set 
                 id_pelajaran='$id_pelajaran'
                 where id_jadwal='$id_jadwal'
             ");
             
         }else{
 
-            mysqli_query($koneksi, "insert into jadwal set 
+            mysqli_query($db, "insert into jadwal set 
                 id_pelajaran='$id_pelajaran', 
                 id_jam='$id_jam', 
                 hari='$hari', 
@@ -45,7 +46,7 @@
                             JOIN semester on semester.id_semester = kelas.id_semester
                             WHERE id_ruangan='$id_ruangan' && id_jam='$id_jam' && hari='$hari' && semester.status='1'
                             ";
-        $select         = mysqli_query($koneksi, $select);
+        $select         = mysqli_query($db, $select);
         $select         = mysqli_fetch_array($select);
 
 
@@ -59,14 +60,14 @@
 
             if($id_jadwal){
     
-                mysqli_query($koneksi, "update jadwal set 
+                mysqli_query($db, "update jadwal set 
                     id_ruangan='$id_ruangan'
                     where id_jadwal='$id_jadwal'
                 ");
     
             }else{
     
-                mysqli_query($koneksi, "insert into jadwal set 
+                mysqli_query($db, "insert into jadwal set 
                     id_ruangan='$id_ruangan', 
                     id_jam='$id_jam', 
                     hari='$hari', 
@@ -87,7 +88,7 @@
                             JOIN semester on semester.id_semester = kelas.id_semester
                             WHERE id_guru='$id_guru' && id_jam='$id_jam' && hari='$hari' && semester.status='1'
                             ";
-        $select         = mysqli_query($koneksi, $select);
+        $select         = mysqli_query($db, $select);
         $select         = mysqli_fetch_array($select);
 
 
@@ -101,14 +102,14 @@
 
             if($id_jadwal){
     
-                mysqli_query($koneksi, "update jadwal set 
+                mysqli_query($db, "update jadwal set 
                     id_guru='$id_guru'
                     where id_jadwal='$id_jadwal'
                 ");
     
             }else{
     
-                mysqli_query($koneksi, "insert into jadwal set 
+                mysqli_query($db, "insert into jadwal set 
                     id_guru='$id_guru', 
                     id_jam='$id_jam', 
                     hari='$hari', 
