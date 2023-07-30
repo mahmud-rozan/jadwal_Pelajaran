@@ -23,7 +23,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                     <div class="col-md-12 row">
                         <h1 class="mt-4">Jadwal Pelajaran</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index_user.php">Dashboard</a></li>
                             <li class="breadcrumb-item active">Jadwal Pelajaran</li>
                         </ol>
 

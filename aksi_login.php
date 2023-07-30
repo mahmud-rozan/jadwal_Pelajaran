@@ -36,3 +36,16 @@ function countData($table) {
  alert('<?php echo $pesan;?>');
  location='index.php';
 </script>
+
+<?php
+
+  session_start();
+  $role = $_SESSION['level'];
+
+  if($role=="1"){
+  header("location: index.php");
+  }
+  elseif($role=="0"){
+  header("location: index_user.php");
+  }
+  ?>

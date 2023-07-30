@@ -147,133 +147,128 @@ echo '</script>';
                                         <input type="hidden" name="id_jam" value="<?php echo $data_jam['id_jam']; ?>">
                                         <?php
 
-                                                $id_kelas = $_GET['id_kelas'];
-                                                $id_jam = $data_jam['id_jam'];
+                                                    $id_kelas = $_GET['id_kelas'];
+                                                    $id_jam = $data_jam['id_jam'];
 
-                                                // echo $hari;
+                                                    // echo $hari;
 
-                                                //tampilkan data jadwal sekarang
-                                                $get_jadwal         = mysqli_query($koneksi, 
-                                                                        "select * from jadwal 
-                                                                        join pelajaran on pelajaran.id_pelajaran = jadwal.id_pelajaran
-                                                                        where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
-                                                                        ");
-                                                $data_jadwal         = mysqli_fetch_array($get_jadwal);
+                                                    //tampilkan data jadwal sekarang
+                                                    $get_jadwal         = mysqli_query($db, 
+                                                                            "select * from jadwal 
+                                                                            join pelajaran on pelajaran.id_pelajaran = jadwal.id_pelajaran
+                                                                            where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
+                                                                            ");
+                                                    $data_jadwal         = mysqli_fetch_array($get_jadwal);
 
-                                        ?>
-                                        <div class="input-group">
-                                        <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
-                                        <select disabled  style="border:none;color:black;background-color:white" name="id_pelajaran" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['pelajaran']; ?>"
+                                            ?>
+                                            <div class="">
+                                            <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
+                                            <select disabled  style="border:none;color:black;background-color:white" name="id_pelajaran" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['pelajaran']; ?>"
                                             onChange="document.getElementById('form_id_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();" >
-                                            <option value="">--Pilih Mata Kuliah--</option>
+                                                <option value="">--Pilih Mata Kuliah--</option>
+                                                <?php
+
+                                                    //tampilkan data mata pelajaran
+                                                    $get_pelajaran         = mysqli_query($db, "select * from pelajaran");
+                                                    while($data_pelajaran= mysqli_fetch_array($get_pelajaran)){
+                                                ?>
+                                                
+                                                <option
+                                                    <?php if($data_jadwal['id_pelajaran'] == $data_pelajaran['id_pelajaran']){ echo "selected"; } ?>
+                                                    value="<?php echo $data_pelajaran['id_pelajaran']; ?>">
+                                                    <?php echo $data_pelajaran['pelajaran']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            </div>
+                                        </form>
+
+                                        <!-- ruangan -->
+                                        <form action="proses.php" method="post" id="form_id1_<?php echo $j.'_'.$data_jam['id_jam']; ?>">
+                                            <input type="hidden" name="id_kelas" value="<?php echo $_GET['id_kelas']; ?>">
+                                            <input type="hidden" name="hari" value="<?php echo $hari; ?>">
+                                            <input type="hidden" name="id_jam" value="<?php echo $data_jam['id_jam']; ?>">
+                                            <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
                                             <?php
 
-                                                //tampilkan data mata pelajaran
-                                                $get_pelajaran         = mysqli_query($koneksi, "select * from pelajaran");
-                                                while($data_pelajaran= mysqli_fetch_array($get_pelajaran)){
+                                                    $id_kelas = $_GET['id_kelas'];
+                                                    $id_jam = $data_jam['id_jam'];
+
+                                                    // echo $hari;
+
+                                                    //tampilkan data ruangan sekarang
+                                                    $get_jadwal         = mysqli_query($db, 
+                                                                            "select * from jadwal 
+                                                                            join ruangan on ruangan.id_ruangan = jadwal.id_ruangan
+                                                                            where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
+                                                                            ");
+                                                                                            
+                                                    $data_jadwal         = mysqli_fetch_array($get_jadwal);
+                                                    // $id_kelas; die;    
+
+                                                    // var_dump($data_jadwal); die;
                                             ?>
                                             
-                                            <option
-                                                <?php if($data_jadwal['id_pelajaran'] == $data_pelajaran['id_pelajaran']){ echo "selected"; } ?>
-                                                value="<?php echo $data_pelajaran['id_pelajaran']; ?>">
-                                                <?php echo $data_pelajaran['pelajaran']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        </div>
-                                    </form>
+                                            <div class="">
+                                            <select disabled  style="border:none;color:black;background-color:white" name="id_ruangan" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['ruangan']; ?>"
+                                            onChange="document.getElementById('form_id1_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();">
+                            
+                                                <?php
 
-                                    <!-- ruangan -->
-                                    <!-- <form action="proses.php" method="post" id="form_id1_<?php echo $j.'_'.$data_jam['id_jam']; ?>"> -->
-                                    <form action="">
-                                        <input type="hidden" name="id_kelas" value="<?php echo $_GET['id_kelas']; ?>">
-                                        <input type="hidden" name="hari" value="<?php echo $hari; ?>">
-                                        <input type="hidden" name="id_jam" value="<?php echo $data_jam['id_jam']; ?>">
-                                        <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
-                                        <?php
+                                                    //tampilkan data ruangan
+                                                    $get_ruangan        = mysqli_query($db, "select * from ruangan");
+                                                    while($data_ruangan= mysqli_fetch_array($get_ruangan)){
+                                                ?>
+                                                <option
+                                                    <?php if($data_jadwal['id_ruangan'] == $data_ruangan['id_ruangan']){ echo "selected"; } ?>
+                                                    value="<?php echo $data_ruangan['id_ruangan']; ?>">
+                                                    <?php echo $data_ruangan['ruangan']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            </div>
+                                            <!-- <?php var_dump($data_jadwal); ?> -->
+                                        </form>
+
+                                        <form action="proses.php" method="post" id="form_id2_<?php echo $j.'_'.$data_jam['id_jam']; ?>">
+                                            <?php
+    
 
                                                 $id_kelas = $_GET['id_kelas'];
                                                 $id_jam = $data_jam['id_jam'];
 
-                                                // echo $hari;
-
-                                                //tampilkan data ruangan sekarang
-                                                $get_jadwal         = mysqli_query($koneksi, 
+                                                //tampilkan data id_jadwal
+                                                $get_id_jadwal         = mysqli_query($db, 
                                                                         "select * from jadwal 
-                                                                        join ruangan on ruangan.id_ruangan = jadwal.id_ruangan
-                                                                        where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
+                                                                        where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari' 
                                                                         ");
-                                                                                        
-                                                $data_jadwal         = mysqli_fetch_array($get_jadwal);
-                                                // $id_kelas; die;    
-
-                                                // var_dump($data_jadwal); die;
-                                        ?>
+                                                $id_jadwal             = mysqli_fetch_array($get_id_jadwal);
+                                            ?>
+                                            <input type="hidden" name="id_jadwal" value="<?php echo $id_jadwal['id_jadwal']; ?>">
+                                            <input type="hidden" name="id_jam" value="<?php echo $id_jam; ?>">
+                                            <input type="hidden" name="hari" value="<?php echo $hari; ?>">
+                                            <input type="hidden" name="id_kelas" value="<?php echo $id_kelas; ?>">
                                         
-                                        <div class="input-group">
-                                        <select disabled  style="border:none;color:black;background-color:white" name="id_ruangan" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['ruangan']; ?>"
-                                            onChange="document.getElementById('form_id1_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();">
-                                            <option value="">--Pilih Ruangan--</option>
                                             <?php
-
-                                                //tampilkan data ruangan
-                                                $get_ruangan        = mysqli_query($koneksi, "select * from ruangan");
-                                                while($data_ruangan= mysqli_fetch_array($get_ruangan)){
+                                                error_reporting(0);
+                                                //guru tooltip
+                                                $get_guru_tooltip         = mysqli_query($db, 
+                                                "select * from guru where id_guru = ".$id_jadwal['id_guru']);
+                                                $guru_tooltip             = mysqli_fetch_array($get_guru_tooltip);
                                             ?>
-                                            <option
-                                                <?php if($data_jadwal['id_ruangan'] == $data_ruangan['id_ruangan']){ echo "selected"; } ?>
-                                                value="<?php echo $data_ruangan['id_ruangan']; ?>">
-                                                <?php echo $data_ruangan['ruangan']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        </div>
-                                        <!-- <?php var_dump($data_jadwal); ?> -->
-                                    </form>
-
-                                    <!-- <form action="proses.php" method="post" id="form_id2_<?php echo $j.'_'.$data_jam['id_jam']; ?>"> -->
-                                    <form action="">
-                                        <?php
-   
-
-                                            $id_kelas = $_GET['id_kelas'];
-                                            $id_jam = $data_jam['id_jam'];
-
-                                            //tampilkan data id_jadwal
-                                            $get_id_jadwal         = mysqli_query($koneksi, 
-                                                                    "select * from jadwal 
-                                                                    where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari' 
-                                                                    ");
-                                            $id_jadwal             = mysqli_fetch_array($get_id_jadwal);
-                                        ?>
-                                        <input type="hidden" name="id_jadwal" value="<?php echo $id_jadwal['id_jadwal']; ?>">
-                                        <input type="hidden" name="id_jam" value="<?php echo $id_jam; ?>">
-                                        <input type="hidden" name="hari" value="<?php echo $hari; ?>">
-                                        <input type="hidden" name="id_kelas" value="<?php echo $id_kelas; ?>">
-                                    
-                                        <?php
-                                            error_reporting(0);
-                                            //guru tooltip
-                                            $get_guru_tooltip         = mysqli_query($koneksi, 
-                                            "select * from guru where id_guru = ".$id_jadwal['id_guru']);
-                                            $guru_tooltip             = mysqli_fetch_array($get_guru_tooltip);
-                                        ?>
-                                        <div class="input-group">
-                                        <select disabled  style="border:none;color:black;background-color:white" name="id_guru" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $guru_tooltip['nama']; ?>"
+                                            <div class="">
+                                            <select disabled  style="border:none;color:black;background-color:white" name="id_guru" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $guru_tooltip['nama']; ?>"
                                             onChange="document.getElementById('form_id2_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();">
-                                            <option value="">--Pilih Guru--</option>
-                                            <?php
-                                                //tampilkan data guru
-                                                $get_guru         = mysqli_query($koneksi, "select * from guru");
-                                                while($data_guru= mysqli_fetch_array($get_guru)){
-                                            ?>
-                                            <option  <?php if($id_jadwal['id_guru'] == $data_guru['id_guru']){ echo "selected"; } ?> value="<?php echo $data_guru['id_guru']; ?>">
-                                                <?php echo $data_guru['nama']; ?> 
-                                            </option>
-                                            <?php } ?>
-
-
-                                            
-                                        </select>
-                                        <div>
+                                                
+                                                <?php
+                                                    //tampilkan data guru
+                                                    $get_guru         = mysqli_query($db, "select * from guru");
+                                                    while($data_guru= mysqli_fetch_array($get_guru)){
+                                                ?>
+                                                <option  <?php if($id_jadwal['id_guru'] == $data_guru['id_guru']){ echo "selected"; } ?> value="<?php echo $data_guru['id_guru']; ?>">
+                                                    <?php echo $data_guru['nama']; ?> 
+                                                </option>
+                                                <?php } ?>   
+                                            </select>   
+                                        </form>
                                     </form>
                                 </td>
                                 <?php } ?>

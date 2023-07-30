@@ -15,21 +15,23 @@ if($level == 0) { include "template/navigasi_user.php"; }
 ?>
 
 <!DOCTYPE html>
-
+<html lang="en">
 <div id="layoutSidenav_content">
         <main>
         <div class="container-fluid px-4">
         <div class="content">
+                    <div class="col-md-12 row">
                         <h1 class="mt-4">Jadwal Pelajaran</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="menu_jadwal_user.php">Jadwal</a></li>
                             <li class="breadcrumb-item active">Jadwal Pelajaran</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
                             <?php
-                                $koneksi        = mysqli_connect("localhost", "root", "", "jadwal");
-                                $get_kelas_now  = mysqli_query($koneksi, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
+                                include('koneksi.php');
+                                // $koneksi        = mysqli_connect("localhost", "root", "", "jadwal");
+                                $get_kelas_now  = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
                                 $kelas_now      = mysqli_fetch_array($get_kelas_now);
                                 // echo $id_kelas; die; mematikan  
                             ?>
@@ -42,7 +44,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                         <?php
                             include "koneksi.php";
                             $id = $_GET['id_kelas'];
-                            $sql = mysqli_query($koneksi, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
+                            $sql = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
                             
                             // $sql = mysqli_query($koneksi, "select max(id_jadwal as maxID from jadwal)");
                             $data = mysqli_fetch_array($sql);
@@ -54,8 +56,10 @@ if($level == 0) { include "template/navigasi_user.php"; }
 
                             echo $kodeauto;
                         ?>
+                    </div>    
                     </div>
                 </div>  
+                
                 <div class="card mb-4">
                     <div class="card-body">
                 <br>
@@ -92,7 +96,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                             <tbody>
                                 <?php
 
-                                    $get_jam         = mysqli_query($koneksi, "select * from jam");
+                                    $get_jam         = mysqli_query($db, "select * from jam");
                                     while($data_jam= mysqli_fetch_array($get_jam)){
                                 ?>
                                 <tr>
@@ -125,7 +129,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                     // echo $hari;
 
                                                     //tampilkan data jadwal sekarang
-                                                    $get_jadwal         = mysqli_query($koneksi, 
+                                                    $get_jadwal         = mysqli_query($db, 
                                                                             "select * from jadwal 
                                                                             join pelajaran on pelajaran.id_pelajaran = jadwal.id_pelajaran
                                                                             where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
@@ -141,7 +145,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                 <?php
 
                                                     //tampilkan data mata pelajaran
-                                                    $get_pelajaran         = mysqli_query($koneksi, "select * from pelajaran");
+                                                    $get_pelajaran         = mysqli_query($db, "select * from pelajaran");
                                                     while($data_pelajaran= mysqli_fetch_array($get_pelajaran)){
                                                 ?>
                                                 
@@ -168,7 +172,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                     // echo $hari;
 
                                                     //tampilkan data ruangan sekarang
-                                                    $get_jadwal         = mysqli_query($koneksi, 
+                                                    $get_jadwal         = mysqli_query($db, 
                                                                             "select * from jadwal 
                                                                             join ruangan on ruangan.id_ruangan = jadwal.id_ruangan
                                                                             where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari'
@@ -187,7 +191,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                 <?php
 
                                                     //tampilkan data ruangan
-                                                    $get_ruangan        = mysqli_query($koneksi, "select * from ruangan");
+                                                    $get_ruangan        = mysqli_query($db, "select * from ruangan");
                                                     while($data_ruangan= mysqli_fetch_array($get_ruangan)){
                                                 ?>
                                                 <option
@@ -208,7 +212,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                 $id_jam = $data_jam['id_jam'];
 
                                                 //tampilkan data id_jadwal
-                                                $get_id_jadwal         = mysqli_query($koneksi, 
+                                                $get_id_jadwal         = mysqli_query($db, 
                                                                         "select * from jadwal 
                                                                         where id_jam='$id_jam' && id_kelas='$id_kelas' && hari='$hari' 
                                                                         ");
@@ -222,7 +226,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                             <?php
                                                 error_reporting(0);
                                                 //guru tooltip
-                                                $get_guru_tooltip         = mysqli_query($koneksi, 
+                                                $get_guru_tooltip         = mysqli_query($db, 
                                                 "select * from guru where id_guru = ".$id_jadwal['id_guru']);
                                                 $guru_tooltip             = mysqli_fetch_array($get_guru_tooltip);
                                             ?>
@@ -232,7 +236,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                                 <option value="">--Pilih Guru--</option>
                                                 <?php
                                                     //tampilkan data guru
-                                                    $get_guru         = mysqli_query($koneksi, "select * from guru");
+                                                    $get_guru         = mysqli_query($db, "select * from guru");
                                                     while($data_guru= mysqli_fetch_array($get_guru)){
                                                 ?>
                                                 <option  <?php if($id_jadwal['id_guru'] == $data_guru['id_guru']){ echo "selected"; } ?> value="<?php echo $data_guru['id_guru']; ?>">

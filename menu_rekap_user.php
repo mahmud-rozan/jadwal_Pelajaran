@@ -23,10 +23,9 @@ if($level == 0) { include "template/navigasi_user.php"; }
                     <div class="col-md-12 row">
                         <h1 class="mt-4">Rekap Guru</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index_user.php">Dashboard</a></li>
                             <li class="breadcrumb-item active">Rekap Guru</li>
                         </ol>
-
                         <div class="card mb-4">
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -44,11 +43,8 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                     </thead>                                   
                                     <tbody>
                                         <?php
-                                            $host = 'localhost';
-                                            $username = 'root';
-                                            $password = '';
-                                            $database = 'jadwal';
-                                            $conn = mysqli_connect($host, $username, $password, $database);
+                                            include('koneksi.php');
+                                            // $conn = mysqli_connect($db);
                                             $no = 1;
                                             $query = "SELECT *
                                             FROM jadwal
@@ -58,7 +54,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                             LEFT JOIN ruangan ON jadwal.id_ruangan = ruangan.id_ruangan
                                             LEFT JOIN pelajaran ON jadwal.id_pelajaran = pelajaran.id_pelajaran";
 
-                                                        $result = mysqli_query($conn, $query);
+                                                        $result = mysqli_query($db, $query);
 
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                         ?>
@@ -76,6 +72,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
                                 </table>
                             </div>
                         </div>
+                    </div>
                     </div>
             </div>
         </div>
