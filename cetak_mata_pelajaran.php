@@ -165,7 +165,7 @@ echo '</script>';
                                             <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
                                             <select disabled  style="border:none;color:black;background-color:white" name="id_pelajaran" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['pelajaran']; ?>"
                                             onChange="document.getElementById('form_id_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();" >
-                                                <option value="">--Pilih Mata Kuliah--</option>
+                                                
                                                 <?php
 
                                                     //tampilkan data mata pelajaran

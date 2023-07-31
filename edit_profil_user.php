@@ -42,7 +42,7 @@ if($level == 0) { include "template/navigasi_user.php"; }
 
                                         mysqli_query($db, "UPDATE users SET name='$name', username='$username', password='$password' WHERE id='$id'") or die(mysqli_error($koneksi));
 
-                                        echo "<script>alert('Data berhasil diupdate.');window.location='index.php';</script>";
+                                        echo "<script>alert('Data berhasil diupdate.');window.location='index_user.php';</script>";
                                     }
 
                                     $query = mysqli_query($db, "SELECT * FROM users WHERE id='$id'");
