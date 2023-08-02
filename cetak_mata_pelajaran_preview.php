@@ -63,8 +63,8 @@
     <h2 style="text-align:center">Jadwal Mata Pelajaran SMKN BANDUNG</h2>
 		<!-- <h3 style="text-align:center">Data Jadwal Mata Pelajaran</h3> -->
         <?php                       
-                        $koneksi        = mysqli_connect("localhost", "root", "", "jadwal");
-                        $get_kelas_now  = mysqli_query($koneksi, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
+                        $db        = mysqli_connect("localhost", "root", "", "jadwal");
+                        $get_kelas_now  = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
                         $kelas_now      = mysqli_fetch_array($get_kelas_now);
                         // echo $id_kelas; die; mematikan  
         ?>
@@ -75,9 +75,9 @@
         <!-- kondisi -->
         <!-- <?php
 
-        include "koneksi.php";
+        include('koneksi.php');
         $id = $_GET['id_kelas'];
-        $sql = mysqli_query($koneksi, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
+        $sql = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
         
         // $sql = mysqli_query($koneksi, "select max(id_jadwal as maxID from jadwal)");
         $data = mysqli_fetch_array($sql);
@@ -114,7 +114,7 @@
                         <tbody>
                         <?php
 
-                            $get_jam         = mysqli_query($koneksi, "select * from jam");
+                            $get_jam         = mysqli_query($db, "select * from jam");
                             while($data_jam= mysqli_fetch_array($get_jam)){
                             ?>
                             <tr>
