@@ -68,7 +68,7 @@ echo '</script>';
     <h2 style="text-align:center">Jadwal Mata Pelajaran SMKN 5 BANDUNG</h2>
 		<!-- <h3 style="text-align:center">Data Jadwal Mata Pelajaran</h3> -->
         <?php                       
-                        $db        = mysqli_connect("localhost", "root", "", "jadwal");
+                        include('koneksi.php');
                         $get_kelas_now  = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
                         $kelas_now      = mysqli_fetch_array($get_kelas_now);
                         // echo $id_kelas; die; mematikan  
@@ -80,7 +80,7 @@ echo '</script>';
         <!-- kondisi -->
         <!-- <?php
 
-        include('koneksi.php'); 
+        include('koneksi.php');
         $id = $_GET['id_kelas'];
         $sql = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
         
@@ -163,7 +163,7 @@ echo '</script>';
                                             ?>
                                             <div class="">
                                             <input type="hidden" name="id_jadwal" value="<?php echo $data_jadwal['id_jadwal']; ?>">
-                                            <select disabled  style="border:none;color:black;background-color:white" name="id_pelajaran" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['pelajaran']; ?>"
+                                            <select disabled style="border:none;color:black;background-color:white" name="id_pelajaran" style="width: 150px; class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $data_jadwal['pelajaran']; ?>"
                                             onChange="document.getElementById('form_id_<?php echo $j.'_'.$data_jam['id_jam']; ?>').submit();" >
                                                 
                                                 <?php
@@ -171,6 +171,7 @@ echo '</script>';
                                                     //tampilkan data mata pelajaran
                                                     $get_pelajaran         = mysqli_query($db, "select * from pelajaran");
                                                     while($data_pelajaran= mysqli_fetch_array($get_pelajaran)){
+                                                        
                                                 ?>
                                                 
                                                 <option

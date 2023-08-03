@@ -63,7 +63,7 @@
     <h2 style="text-align:center">Jadwal Mata Pelajaran SMKN BANDUNG</h2>
 		<!-- <h3 style="text-align:center">Data Jadwal Mata Pelajaran</h3> -->
         <?php                       
-                        $db        = mysqli_connect("localhost", "root", "", "jadwal");
+                        include('koneksi.php');
                         $get_kelas_now  = mysqli_query($db, "select * from kelas where id_kelas = ".$_GET['id_kelas']);
                         $kelas_now      = mysqli_fetch_array($get_kelas_now);
                         // echo $id_kelas; die; mematikan  
